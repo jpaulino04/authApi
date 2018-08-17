@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo rm -R /var/www/html/myApps/sampleNodeApp/*

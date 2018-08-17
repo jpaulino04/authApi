@@ -1,0 +1,23 @@
+<% include partials/header %>
+
+<div class="container">
+  <div class="row ">
+    <div class="col-8 mx-auto mt-5">
+      <h3 class="text-center">Please Login</h3>
+      <form class="form-inline" action="/send" method="POST"> 
+        <div class="form-group mx-auto">
+            <div class="input-group ">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input type="email" class="form-control" id="email" placeholder="Email">
+            </div>                 
+          <input class="form-control m-2" name="password" type="password" placeholder="Password">       
+          <input class="btn btn-primary my-2 mx-auto d-block" type="submit" value="Login">
+        </div>        
+      </form>
+    </div>    
+  </div>
+</div>
+
+<% include partials/footer %>

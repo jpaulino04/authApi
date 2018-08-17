@@ -1,0 +1,5 @@
+#!/bin/bash
+npm install --prefix /var/www/html/myApps/sampleNodeApp/
+cd /var/www/html/myApps/sampleNodeApp/
+# forever stop app.js
+# forever start -o /home/bitnami/myApps/log_Files/jpaulino.com-out.log -e /home/bitnami/myApps/log_Files/jpaulino.com-err.log app.js
