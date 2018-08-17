@@ -4,13 +4,9 @@ var   express                 = require('express'),
       flash                   = require("connect-flash"),
       bodyParser              = require("body-parser"),
       mongoose                = require("mongoose");
-      passport                = require("passport"),
-      localStrategy           = require("passport-local").Strategy,
-      passportJWT             = require("passport-jwt"),
-      JWTStrategy             = passportJWT.Strategy,
-      bcrypt                  = require('bcryptjs');
-
-
+      passport                = require("passport");
+      //jwt will create the token
+      //passport will validate 
 
 //Require Routes
 const  profile = require("./routes/api/profile");
@@ -26,20 +22,20 @@ mongoose
   .then(() => console.log("MongoDB Connected"))
   .catch( err => console.log("Connection to DB failed: "+err))
 
-
+//Set Port
+app.set('port', (process.env.PORT ||3004))
 //ejs engine
 app.set('view engine', 'ejs');
 //Static files
 app.use(express.static(__dirname + '/public'));
-app.set('port', (process.env.PORT ||3004))
 app.use(methodOverride("_method"));
-app.use(flash());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(flash()); //connect-flash
+app.use(bodyParser.urlencoded({extended: false})); //extended false uses qs
 app.use(bodyParser.json())
 
   //Express session
 app.use(require("express-session")({
-  secret:"Caws and horses are nice animals",
+  secret:"Caws and horses are funny animals",
   resave: false,
   saveUninitialized: false
 }));
@@ -51,6 +47,11 @@ app.use(function(req, res, next){
   next();
 });
 
+//Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
 
 // Use Routes
 //Export routes or you will get an error
